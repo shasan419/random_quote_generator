@@ -126,7 +126,10 @@ function Home() {
   }
 
   function getNewQuote() {
-    addToRatedQuotes();
+    if (rated > 0) {
+      addToRatedQuotes();
+    }
+
     if (rated > 3) {
       const allNewQuotes = allQuotes.filter(
         (x) => x.text !== preRatedQuote.text

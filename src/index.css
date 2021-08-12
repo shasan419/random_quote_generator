@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: cursive !important;
+  font-family: "Delius", cursive !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,4 +41,5 @@ q::after {
 }
 q {
   quotes: "“" "”";
+  font-family: "Roboto Slab", serif;
 }
