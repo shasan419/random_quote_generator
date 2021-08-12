@@ -6,7 +6,12 @@ import CButton from "../../components/CButton/CButton";
 import CLink from "../../components/CLink/CLink";
 import CRate from "../../components/CRate/CRate";
 import Header from "../../components/Header/Header";
-import { getSimilarQuote, getDifferentQuote } from "../../utils/utils";
+import {
+  getSimilarQuote,
+  getDifferentQuote,
+  getSessionItem,
+  setSessionItem,
+} from "../../utils/utils";
 
 const Container = styled.div`
   display: flex;
@@ -73,7 +78,7 @@ function Home() {
   } //performs api call and sets random quote to currentQuote
 
   function addToRatedQuotes() {
-    const ratedOldArray = JSON.parse(sessionStorage.getItem("ratedQuotes"));
+    const ratedOldArray = getSessionItem("ratedQuotes");
     if (ratedOldArray) {
       let found = false;
       for (let i = 0; i < ratedOldArray.length; i++) {
@@ -92,10 +97,7 @@ function Home() {
               },
               ...ratedOldArray.slice(i + 1),
             ];
-            sessionStorage.setItem(
-              "ratedQuotes",
-              JSON.stringify(ratedNewArray)
-            );
+            setSessionItem("ratedQuotes", ratedNewArray);
             console.log(ratedNewArray);
           }
         }
@@ -109,7 +111,7 @@ function Home() {
             rated: rated,
           },
         ];
-        sessionStorage.setItem("ratedQuotes", JSON.stringify(ratedNewArray));
+        setSessionItem("ratedQuotes", ratedNewArray);
         // console.log(ratedNewArray);
       }
     } else {
@@ -120,7 +122,7 @@ function Home() {
           rated: rated,
         },
       ];
-      sessionStorage.setItem("ratedQuotes", JSON.stringify(ratedNewArray));
+      setSessionItem("ratedQuotes", ratedNewArray);
       //   console.log(ratedNewArray);
     }
   }

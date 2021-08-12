@@ -6,7 +6,7 @@ function getSimilarQuote(singleQuote, allQuotes) {
   });
   let quoteIndex = newAllQuotes.indexOf(singleQuote);
   newAllQuotes.splice(quoteIndex, 1);
-  let matches = stringSimilarity.findBestMatch(singleQuote, newAllQuotes);
+  let matches = checkStringSimilarity(singleQuote, newAllQuotes);
   // console.log(matches);
   let matchingQuoteString = matches.bestMatch.target;
   const matchingQuote = allQuotes.filter((x) => x.text === matchingQuoteString);
@@ -19,7 +19,7 @@ function getDifferentQuote(singleQuote, allQuotes) {
   });
   let quoteIndex = newAllQuotes.indexOf(singleQuote);
   newAllQuotes.splice(quoteIndex, 1);
-  let matches = stringSimilarity.findBestMatch(singleQuote, newAllQuotes);
+  let matches = checkStringSimilarity(singleQuote, newAllQuotes);
   // console.log(matches);
   let mostUnmatchedQuote = matches.ratings.sort((a, b) => {
     return a.rating - b.rating;
@@ -28,4 +28,18 @@ function getDifferentQuote(singleQuote, allQuotes) {
   return totalDiffQuote;
 }
 
-export { getSimilarQuote, getDifferentQuote };
+function checkStringSimilarity(singleQuote, allQuotes) {
+  const matches = stringSimilarity.findBestMatch(singleQuote, allQuotes);
+  return matches;
+}
+
+function getSessionItem(itemName) {
+  const data = JSON.parse(sessionStorage.getItem(itemName));
+  return data;
+}
+
+function setSessionItem(itemName, itemData) {
+  sessionStorage.setItem(itemName, JSON.stringify(itemData));
+}
+
+export { getSimilarQuote, getDifferentQuote, getSessionItem, setSessionItem };

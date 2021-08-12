@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import styled from "styled-components";
 import CRate from "../../components/CRate/CRate";
+import { getSessionItem } from "../../utils/utils";
 
 const Container = styled.div`
   display: grid;
@@ -42,9 +43,7 @@ const Figure = styled.figure`
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 const Rated = () => {
-  const [quotes, setQuotes] = useState(
-    JSON.parse(sessionStorage.getItem("ratedQuotes"))
-  );
+  const [quotes, setQuotes] = useState(getSessionItem("ratedQuotes"));
   return (
     <>
       <Header />
